@@ -1,0 +1,54 @@
+--+=+-- Lazy.nvim plugins --+=+--
+--  :Lazy
+
+require('lazy').setup(
+    {
+        --  Color scheme
+        --require('colorscheme'),
+
+        --  Plugins
+
+        --  Init
+        require 'plugins.gitsigns',
+        require 'plugins.which_key',
+        require 'plugins.telescope',
+        require 'plugins.lspconfig',
+        require 'plugins.conform',
+        require 'plugins.cmp',
+        require 'plugins.todo_comments',
+        require 'plugins.mini',
+        require 'plugins.treesitter',
+
+        --
+        require 'plugins.autopairs',
+        require 'plugins.dap',
+        require 'plugins.indent_blankline',
+        require 'plugins.lint',
+        require 'plugins.neo_tree',
+    },
+    {
+        ui = {
+            -- If you are using a Nerd Font:
+            -- Set icons to an empty table which will use the
+            -- default lazy.nvim defined Nerd Font icons
+            -- Otherwise, define a unicode icons table
+            icons = vim.g.have_nerd_font and {} or {
+                cmd = '⌘',
+                config = '🛠',
+                event = '📅',
+                ft = '📂',
+                init = '⚙',
+                keys = '🗝',
+                plugin = '🔌',
+                runtime = '💻',
+                require = '🌙',
+                source = '📄',
+                start = '🚀',
+                task = '📌',
+                lazy = '💤 ',
+            },
+        },
+    }
+)
+
+--  vim: ts=4 sts=4 sw=4 et

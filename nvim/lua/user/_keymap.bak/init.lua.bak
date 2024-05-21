@@ -1,0 +1,170 @@
+--+=+-----------------------------+=+--
+--+=+-- Keymaps: Initialization --+=+--
+--+=+-----------------------------+=+--
+
+local uc_keymap = ('user.config.keymap')
+
+local nnoremap = require('user.keymaps.utils').nnoremap
+local vnoremap = require('user.keymaps.utils').vnoremap
+local inoremap = require('user.keymaps.utils').inoremap
+local tnoremap = require('user.keymaps.utils').tnoremap
+
+local M = {}
+
+--  Avoid `<Leader>` interference
+--  NORMAL mode
+nnoremap(
+    uc_keymap.leader,
+    '<nop>',
+    { desc = "Disable `<Space>`, to avoid `<Leader>` interference" }
+)
+
+--  Avoid `<Leader>` interference
+--  VISUAL mode
+vnoremap(
+    uc_keymap.leader,
+    '<nop>',
+    { desc = "Disable `<Space>`, to avoid `<Leader>` interference" }
+)
+
+--  Re-enable default `<Space>` functionality to prevent input delay
+-- if (uc_keymap.init.leader == '<Space>') then
+    tnoremap(
+        uc_keymap.leader,
+        '<Space>',
+        { desc = "Re-enable `<Space>` in TERMINAL mode, to prevent input delay" }
+    )
+-- end
+
+--  Enforce Vim motions
+-- if (uc_keymap.enforce_motions == true) then
+    --  Up
+    nnoremap(
+        '<Up>',
+        '<cmd>echo "Use `k` to move up"<CR>',
+        { desc = "Block arrow key: Up" }
+    )
+    --  Down
+    nnoremap(
+        '<Down>',
+        '<cmd>echo "Use `j` to move down"<CR>',
+        { desc = "Block arrow key: Down" }
+    )
+    --  Left
+    nnoremap(
+        '<Left>',
+        '<cmd>echo "Use `h` to move left"<CR>',
+        { desc = "Block arrow key: Left" }
+    )
+    --  Right
+    nnoremap(
+        '<Right>',
+        '<cmd>echo "Use `l` to move right"<CR>',
+        { desc = "Block arrow key: Right" }
+    )
+-- end
+
+--+=+---------+=+--
+--+=+-- LSP --+=+--
+--+=+---------+=+--
+
+--  Exports a function to be used in ../../after/plugins/lsp.lua
+--  References the current buffer
+M.map_lsp_keybinds = function(buffer_number)
+    nnoremap(
+        uc_keymap.lsp.rename,
+        vim.lsp.buf.rename,
+        { buffer = buffer_number, desc = "LSP: [R]e[n]ame" }
+    )
+
+    nnoremap(
+        uc_keymap.lsp.code_action,
+        vim.lsp.buf.code_action,
+        { buffer = buffer_number, desc = "LSP: [C]ode [A]ction" }
+    )
+
+    nnoremap(
+        uc_keymap.lsp.goto.definition,
+        vim.lsp.buf.definition,
+        { buffer = buffer_number, desc = "LSP: [G]oto [D]efinition" }
+    )
+
+    nnoremap(
+        uc_keymap.lsp.goto.references,
+        require('telescope.builtin').lsp_references,
+        { buffer = buffer_number, desc = "LSP: [G]oto [R]eferences" }
+    )
+
+    nnoremap(
+        uc_keymap.lsp.goto.implementation,
+        require('telescope.builtin').lsp_implementations,
+        { buffer = buffer_number, desc = "LSP: [G]oto [I]mplementation" }
+    )
+
+    nnoremap(
+        uc_keymap.lsp.symbols.buffer,
+        require('telescope.builtin').lsp_document_symbols,
+        { buffer = buffer_number, desc = "LSP: [B]uffer [S]ymbols" }
+    )
+
+    nnoremap(
+        uc_keymap.lsp.symbols.project,
+        require('telescope.builtin').lsp_workspace_symbols,
+        { buffer = buffer_number, desc = "LSP: [P]roject [S]ymbols", }
+    )
+
+    --  See `:help K`
+    nnoremap(
+        uc_keymap.lsp.documentation.hover,
+        vim.lsp.buf.hover,
+        { buffer = buffer_number, desc = "LSP: Hover Documentation" }
+    )
+
+    nnoremap(
+        uc_keymap.lsp.documentation.signature[1],
+        vim.lsp.buf.signature_help,
+        { buffer = buffer_number, desc = "LSP: Signature Documentation" }
+    )
+
+    nnoremap(
+        uc_keymap.lsp.documentation.signature[2],
+        vim.lsp.buf.signature_help,
+        { buffer = buffer_number, desc = "LSP: Signature Documentation" }
+    )
+
+    --  Lesser used LSP functionality
+    nnoremap(
+        uc_keymap.lsp.goto.declaration,
+        vim.lsp.buf.declaration,
+        { buffer = buffer_number, desc = "LSP: [G]oto [D]eclaration" }
+    )
+
+    nnoremap(
+        uc_keymap.lsp.type_definition,
+        vim.lsp.buf.type_definition,
+        { buffer = buffer_number, desc = "LSP: [T]ype [D]efinition" }
+    )
+end
+
+--  Format
+--  TODO:   Move to...
+nnoremap(
+    uc_keymap.edit.format,
+    function()
+        require('conform').format(
+            {
+                async = true,
+                lsp_fallback = true,
+            }
+        )
+    end,
+    { desc = "[F]ormat the current buffer" }
+)
+
+require('user.keymaps.diagnostics')
+require('user.keymaps.navigation')
+require('user.keymaps.plugins')
+
+return M
+
+-- vim: ts=4 sts=4 sw=4 et

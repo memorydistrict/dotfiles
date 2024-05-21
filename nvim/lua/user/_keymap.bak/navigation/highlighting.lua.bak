@@ -1,0 +1,30 @@
+--+=+------------------------------+=+--
+--+=+-- Navigation: Highlighting --+=+--
+--+=+------------------------------+=+--
+
+local uc_keymap = require('user.config.keymap')
+
+local nnoremap = require('user.keymaps.utils').nnoremap
+
+--  Highlight all, goto previous term under the cursor, and center buffer to cursor
+nnoremap(
+    uc_keymap.search.highlight.goto.prev,
+    '#zz',
+    { desc = "[#] Highlight all and goto previous term under cursor" }
+)
+
+--  Highlight all, goto next term under cursor, and center buffer to cursor
+nnoremap(
+    uc_keymap.search.highlight.goto.next,
+    '*zz',
+    { desc = "[*] Highlight all and goto next term under cursor" }
+)
+
+--  Turn off highlighted results
+nnoremap(
+    uc_keymap.search.highlight.deactivate,
+    '<cmd>noh<cr>',
+    { desc = "[no] Turn off highlighted results" }
+)
+
+-- vim: ts=4 sts=4 sw=4 et

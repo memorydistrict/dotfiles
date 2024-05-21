@@ -1,0 +1,107 @@
+--+=+-- Debugging in Neovim --+=+--
+
+return {
+    --+=+-- nvim-dap --+=+--
+    --  Debug Adapter Protocol client implementation
+    --  https://github.com/mfussenegger/nvim-dap
+    'mfussenegger/nvim-dap',
+    dependencies = {
+        {
+            --+=+-- nvim-dap-ui --+=+--
+            --  User interface for nvim-dap
+            --  https://rcarriga/nvim-dap-ui
+            'rcarriga/nvim-dap-ui',
+            dependencies = {
+                --+=+-- nvim-nio --+=+--
+                --  Asynchronous IO library
+                --  https://github.com/nvim-neotest/nvim-nio
+                'nvim-neotest/nvim-nio',
+            }
+        },
+        --+=+-- mason.nvim --+=+--
+        --  Portable package manager
+        --  https://github.com/williamboman/mason.nvim
+        'williamboman/mason.nvim',
+
+        --+=+-- mason-nvim-dap.nvim --+=+--
+        --  Additional DAP support for mason.nvim
+        --  https://github.com/jay-babu/mason-nvim-dap.nvim
+        'jay-babu/mason-nvim-dap.nvim',
+
+        --+=+-- nvim-dap-go --+=+--
+        -- Debugging support for Go
+        -- https://github.com/leoluz/nvim-dap-go
+        'leoluz/nvim-dap-go',
+    },
+    config = function()
+        local dap = require 'dap'
+        local dapui = require 'dapui'
+
+        require('mason-nvim-dap').setup {
+            --  Setup various debuggers with appropriate configurations
+            automatic_setup = true,
+
+            --  Additional configurations for handlers,
+            --  https://github.com/jay-babu/mason-nvim-dap/blob/main/README.md
+            handlers = {},
+
+            ensure_installed = {
+                'delve',
+            },
+        }
+
+        --+=+-- DAP keymaps --+=+--
+        --  Continue
+        vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
+        --  Step into
+        vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
+        --  Step over
+        vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
+        --  Step out
+        vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
+        --  Toggle breakpoint
+        vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
+        --  Breakpoint condition
+        vim.keymap.set('n', '<leader>B', function()
+            dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+            end, { desc = 'Debug: Set Breakpoint' }
+        )
+
+        --+=+-- DAP UI --+=+--
+        --  :help nvim-dap-ui
+        dapui.setup {
+            icons = {
+                expanded = '▾',
+                collapsed = '▸',
+                current_frame = '*'
+            },
+            controls = {
+                icons = {
+                    pause = '⏸',
+                    play = '▶',
+                    step_into = '⏎',
+                    step_over = '⏭',
+                    step_out = '⏮',
+                    step_back = 'b',
+                    run_last = '▶▶',
+                    terminate = '⏹',
+                    disconnect = '⏏',
+                },
+            },
+        }
+
+        --  Toggle to see last session result
+        --  Without this, you can't see session output in case of unhandled exception
+        vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
+
+        --+=+-- DAP event listeners --+=+--
+        dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+        dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+        dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+        --  Install language-specific setups
+        require('dap-go').setup()
+    end,
+}
+
+--  vim: ts=4 sts=4 sw=4 et

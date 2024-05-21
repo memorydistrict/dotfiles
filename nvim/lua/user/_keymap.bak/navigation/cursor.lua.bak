@@ -1,0 +1,143 @@
+--+=+------------------------+=+--
+--+=+-- Navigation: Cursor --+=+--
+--+=+------------------------+=+--
+
+local uc_keymap = require('user.config.keymap')
+
+local nnoremap = require('user.keymaps.utils').nnoremap
+local inoremap = require('user.keymaps.utils').inoremap
+
+--  Center buffer to cursor
+nnoremap(
+    uc_keymap.view.center,
+    '%zz',
+    { desc = "[%] Center buffer to cursor" }
+)
+
+--  Page up, and center buffer to cursor
+nnoremap(
+    uc_keymap.view.cursor.goto.page.up,
+    '<C-u>zz',
+    { desc = "[<C-u>] Page up" }
+)
+
+--  Page down, and center buffer to cursor
+nnoremap(
+    uc_keymap.view.cursor.goto.page.down,
+    '<C-d>zz',
+    { desc = "[<C-d>] Page down" }
+)
+
+--  Blankline previous, and center buffer to cursor
+nnoremap(
+    uc_keymap.view.cursor.goto.blankline.prev,
+    '{zz',
+    { desc = "[{] Previous blankline" }
+)
+
+--  Blankline next, and center buffer to cursor
+nnoremap(
+    uc_keymap.view.cursor.goto.blankline.next,
+    '}zz',
+    { desc = "[}] Next blankline" }
+)
+
+--  End block previous, and center buffer to cursor
+nnoremap(
+    uc_keymap.view.cursor.goto.block.prev,
+    'nzz',
+    { desc = "[n] Previous endblock" }
+)
+
+--  End block next, center buffer to cursor
+nnoremap(
+    uc_keymap.view.cursor.goto.block.next,
+    'Nzz',
+    { desc = "[N] Next endblock" }
+)
+
+--  Goto first line in buffer, and center buffer to cursor
+nnoremap(
+    uc_keymap.view.cursor.goto.line.first,
+    'ggzz',
+    { desc = "[gg] Goto first line in buffer" }
+)
+
+--  Goto last line in buffer, and center buffer to cursor
+nnoremap(
+    uc_keymap.view.cursor.goto.line.last,
+    'Gzz',
+    { desc = "[G]oto last line in buffer" }
+)
+
+--  Goto previous term under cursor, and center buffer to cursor
+nnoremap(
+    uc_keymap.view.cursor.goto.term.prev,
+    '<C-o>zz',
+    { desc = "[<C-i>] Goto previous term under cursor" }
+)
+
+--  Goto next term under cursor, and center buffer to cursor
+nnoremap(
+    uc_keymap.view.cursor.goto.term.next.
+    '<C-i>zz',
+    { desc = "[<C-o>] Goto next term under cursor" }
+)
+
+--  Goto first character in the line
+nnoremap(
+    uc_keymap.view.cursor.goto.char.first[1],
+    '^',
+    { desc = "[H] Goto first character in the line" }
+)
+
+--  Goto first character in the line
+--  Alternative
+nnoremap(
+    uc_keymap.view.cursor.goto.char.first[2],
+    '^',
+    { desc = "[<Home>] Goto first character in the line" }
+)
+
+--  Goto first character in the line
+--  INSERT mode
+inoremap(
+    uc_keymap.view.cursor.goto.char.first[2],
+    '<Esc>^i',
+    { desc = "[<Home>] Goto first character in the line" }
+)
+
+--  Open the link under the cursor
+--  TODO:   Open plugin strings as GitHub links
+nnoremap(
+    uc_keymap.view.cursor.open_link,
+    ':sil !open <cWORD><cr>',
+    { silent = true, desc = "[gx] Open link under the cursor" }
+)
+
+--[[
+--  Goto last character in the line
+nnoremap(
+    'L',
+    '$<left>',
+    { desc = "[L] Goto last character in the line" }
+)
+
+--  Goto last character in the line
+--  Alternative
+nnoremap(
+    '<End>',
+    '$<left>',
+    { desc = "[<End>] Goto last character in the line" }
+)
+
+--  Goto last character in the line
+--  INSERT mode
+inoremap(
+    '<End>',
+    '<Esc>$<left>i',
+    { desc = "[<End>] Goto last character in the line" }
+)
+]]
+
+-- vim: ts=4 sts=4 sw=4 et

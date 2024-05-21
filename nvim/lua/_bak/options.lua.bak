@@ -1,0 +1,94 @@
+--+=+-- Neovim options --+=+--
+--  :help vim.opt
+--  :help options
+--  :help option-list
+--  :help '{optioon}'
+
+--  Set leader key to <Space>
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+--  Nerd Font is installed and active in terminal
+vim.g.have_nerd_font = true
+
+--  Enable relative line numbers
+vim.opt.nu = true
+vim.opt.rnu = true
+vim.opt.nuw = 6
+
+--  Enable mouse mode
+vim.opt.mouse = 'a' -- all modes
+
+--  Show the cursor mode
+vim.opt.showmode = true
+
+--  Sync clipboard between OS and Neovim.
+vim.opt.clipboard = 'unnamedplus'
+
+--  Enable indentation on line breaks
+vim.opt.breakindent = true
+
+--  Save undo history
+vim.opt.undofile = true
+
+--  Case-insensitive search
+vim.opt.ignorecase = true
+--  Unless \C or one of more capital letters in the search term
+vim.opt.smartcase = true
+
+--  Enable sign column, to prevent the screen from shifting
+vim.opt.signcolumn = 'yes'
+
+--  Decrease swap file update time
+vim.opt.updatetime = 250
+
+--  Configure fold settings
+--  See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
+vim.opt.foldcolumn = '0'
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+
+--  Configure split arrangement
+--  By default, the horizontal split will place the new pane to the top
+vim.opt.splitbelow = true
+--  By default, the vertical split will place the new pane to the left
+vim.opt.splitright = true
+
+--  Sets and configures how Neovim displays certain whitespace characters
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+--  Preview substitutions live
+vim.opt.inccommand = 'split'
+
+--  Show which line your cursor is on
+vim.opt.cursorline = true
+vim.opt.wrap = false
+
+--  Use spaces instead of tabs on indentation
+vim.opt.expandtab = true
+
+--  Set the number of spaces in a tab indentation
+vim.opt.tabstop = 4
+
+--  Set the number of spaces in a nested indentation
+vim.opt.shiftwidth = 4
+
+--  Set the minimal number of visible screen lines to keep above and below the cursor
+vim.opt.scrolloff = 10
+
+--  Set column line
+vim.opt.colorcolumn = "80"
+
+--  Set the mode for which the cursor can be positioned, where no character appears
+vim.opt.virtualedit = 'block'
+
+--  Decrease mapped sequence wait time
+--  Displays which-key popup sooner
+vim.opt.timeoutlen = 300
+
+--  Enables 24-bit color
+vim.opt.termguicolors = true
+
+--  vim: ts=4 sts=4 sw=4 et

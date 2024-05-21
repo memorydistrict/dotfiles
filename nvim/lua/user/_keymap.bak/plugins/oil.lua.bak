@@ -1,0 +1,18 @@
+--+=+---------------------------+=+--
+--+=+-- Keymaps: Plugins: Oil --+=+--
+--+=+---------------------------+=+--
+
+local uc_keymap = require('user.config.keymap')
+
+local nnoremap = require('user.keymaps.utils').nnoremap
+
+--  Open Oil UI
+nnoremap(
+    uc_keymap.oil.open,
+    function()
+        require('oil').toggle_float()
+    end,
+    { desc = "[e] Open Oil UI" }
+)
+
+-- vim: ts=4 sts=4 sw=4 et

@@ -1,0 +1,87 @@
+--+=+---------------------------------+=+--
+--+=+-- Keymaps: Plugins: Telescope --+=+--
+--+=+---------------------------------+=+--
+
+local uc_keymap = require('user.config.keymap')
+
+local nnoremap = require('user.keymaps.utils').nnoremap
+
+--  Search recently opened files
+nnoremap(
+    uc_keymap.file.open.recent,
+    require('telescope.builtin').oldfiles,
+    { desc = "[?] Find recently opened files" }
+)
+
+--  Search open buffers
+nnoremap(
+    uc_keymap.file.open.buffer,
+    require('telescope.builtin').buffers,
+    { desc = "[S]earch Open [B]uffers" }
+)
+
+--  Search files
+nnoremap(
+    uc_keymap.file.open.file,
+    function()
+        require('telescope.builtin').find_files(
+            { hidden = true }
+        )
+    end,
+    { desc = "[S]earch [F]iles" }
+)
+
+--  Search help
+nnoremap(
+    uc_keymap.help.search,
+    require('telescope.builtin').help_tags,
+    { desc = "[S]earch [H]elp" }
+)
+
+--  Search by grep
+nnoremap(
+    '<leader>sg',
+    require('telescope.builtin').live_grep,
+    { desc = "[S]earch by [G]rep" }
+)
+
+--  Search commands
+nnoremap(
+    uc_keymap.command.search,
+    function()
+        require('telescope.builtin').commands(
+            require('telescope.themes').get_dropdown({
+                previewer = false,
+            })
+        )
+    end,
+    { desc = "[S]earch [C]ommands" }
+)
+
+--  Fuzzily search in current buffer
+nnoremap(
+    uc_keymap.search.buffer,
+    function()
+        require('telescope.builtin').current_buffer_fuzzy_find(
+            require('telescope.themes').get_dropdown({
+                previewer = false,
+            })
+        )
+    end,
+    { desc = "[/] Fuzzily search in current buffer" }
+)
+
+--  Search spelling suggestions
+nnoremap(
+    uc_keymap.format.spelling_suggestions,
+    function()
+        require('telescope.builtin').spell_suggest(
+            require('telescope.themes').get_dropdown({
+                previewer = false,
+            })
+        )
+    end,
+    { desc = "[S]earch [S]pelling suggestions" }
+)
+
+-- vim: ts=4 sts=4 sw=4 et

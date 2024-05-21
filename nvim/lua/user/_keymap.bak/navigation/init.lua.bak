@@ -1,0 +1,13 @@
+--+=+--------------------------------+=+--
+--+=+-- Navigation: Initialization --+=+--
+--+=+--------------------------------+=+--
+
+require('user.keymaps.navigation.buffer')
+require('user.keymaps.navigation.clipboard')
+require('user.keymaps.navigation.cursor')
+require('user.keymaps.navigation.find_replace')
+require('user.keymaps.navigation.highlighting')
+require('user.keymaps.navigation.modes')
+require('user.keymaps.navigation.window')
+
+-- vim: ts=4 sts=4 sw=4 et

@@ -1,0 +1,58 @@
+--+=+---------------------------+=+---
+--+=+-- Navigation: Clipboard --+=+=--
+--+=+---------------------------+=+---
+
+--  TODO:   - Complete descriptions
+--          - Route to user.config.keymap
+
+--  local uc_keymap = require('user.config.keymap')
+
+local nnoremap = require('user.keymaps.utils').nnoremap
+local vnoremap = require('user.keymaps.utils').vnoremap
+local xnoremap = require('user.keymaps.utils').xnoremap
+
+--  Redo
+--  NORMAL mode
+nnoremap(
+    'U',
+    '<C-r>',
+    { desc = "[U] Redo" }
+)
+
+--  Paste without losing the contents of the register
+vnoremap(
+    '<A-j>',
+    ":m '>+1<CR>gv=gv",
+    { desc = "" }
+)
+
+vnoremap(
+    '<A-k>',
+    ":m '<-2<CR>gv=gv",
+    { desc = "" }
+)
+
+xnoremap(
+    '<leader>p',
+    '"_dP',
+    { desc = "" }
+)
+
+--  Reselect the last visual selection
+xnoremap(
+    '<<',
+    function()
+        vim.cmd('normal! <<')
+        vim.cmd('normal! gv')
+    end
+)
+
+xnoremap(
+    '>>',
+    function()
+        vim.cmd('normal! <<')
+        vim.cmd('normal! gv')
+    end
+)
+
+-- vim: ts=4 sts=4 sw=4 et

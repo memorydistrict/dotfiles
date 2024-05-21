@@ -1,0 +1,45 @@
+--+=+---------------------------+=+--
+--+=+-- Keymaps: Plugins: Git --+=+--
+--+=+---------------------------+=+--
+
+local uc_keymap = require('user.config.keymap')
+
+local nnoremap = require('user.keymaps.utils').nnoremap
+local utils = require('user.utils')
+
+--  Activiate blame annotations
+nnoremap(
+    uc_keymap.git.blame,
+    ':Gitsigns toggle_current_line_blame<cr>',
+    { desc = "Activate [g]it [b]lame annotations" }
+)
+
+--  Search files
+nnoremap(
+    uc_keymap.git.search,
+    function()
+        local cmd = {
+            'sort',
+            '-u',
+            '<(git diff --name-only --cached)',
+            '<(git diff --name-only)',
+            '<(git diff --name-only --diff-filter=U)',
+        }
+
+        if not utils.is_git_directory() then
+            vim.notify(
+                "Current project is not a git directory",
+                vim.log.levels.WARN,
+                {
+                    title = "Telescope Git Files",
+                    git_command = cmd,
+                }
+            )
+        else
+            require('telescope.builtin').git_files()
+        end
+    end,
+    { desc = "Search [G]it [F]iles" }
+)
+
+-- vim: ts=4 sts=4 sw=4 et

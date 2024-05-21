@@ -1,0 +1,88 @@
+--+=+-----------------------------+=+--
+--+=+-- Diagnostics: Navigation --+=+--
+--+=+-----------------------------+=+--
+
+local uc_keymap = require('user.config.keymap')
+local nnoremap = require('user.keymaps.utils').nnoremap
+
+--  Open the diagnostic under the cursor, in a float window
+nnoremap(
+    uc_keymap.diagnostic.open,
+    function()
+        vim.diagnostic.open_float({
+            border = 'rounded',
+        })
+    end,
+    { desc = "Open [d]iagnostic" }
+)
+
+--  Go to previous diagnostic of any severity
+nnoremap(
+    uc_keymap.diagnostic.goto.all.prev,
+    function()
+        vim.diagnostic.goto_prev({})
+        vim.api.nvim_feedkeys('zz', 'n', false)
+    end,
+    { desc = "[[] Goto previous [d]iagnostic" }
+)
+
+--  Go to next diagnostic of any severity
+nnoremap(
+    uc_keymap.diagnostic.goto.all.next,
+    function()
+        vim.diagnostic.goto_next({})
+        vim.api.nvim_feedkeys('zz', 'n', false)
+    end,
+    { desc = "[]] Goto next [d]iagnostic" }
+)
+
+--  Go to previous ERROR diagnostic
+nnoremap(
+    uc_keymap.diagnostic.goto.error.prev,
+    function()
+        vim.diagnostic.goto_prev({
+            severity = vim.diagnostic.severity.ERROR
+        })
+        vim.api.nvim_feedkeys('zz', 'n', false)
+    end,
+    { desc = "[[] Goto previous [e]rror diagnostic" }
+
+)
+
+--  Go to next ERROR diagnostic
+nnoremap(
+    uc_keymap.diagnostic.goto.error.next,
+    function()
+        vim.diagnostic.goto_next({
+            severity = vim.diagnostic.severity.ERROR
+        })
+        vim.api.nvim_feedkeys('zz', 'n', false)
+    end,
+    { desc = "[]] Goto next [e]rror diagnostic" }
+)
+
+--  Go to previous WARNING diagnostic
+nnoremap(
+    uc_keymap.diagnostic.goto.warning.prev,
+    function()
+        vim.diagnostic.goto_prev({
+            severity = vim.diagnostic.severity.WARN
+        })
+        vim.api.nvim_feedkeys('zz', 'n', false)
+    end,
+    { desc = "[[] Goto previous [w]arning diagnostic" }
+)
+
+--  Go to next WARNING diagnostic
+nnoremap(
+    uc_keymap.diagnostic.goto.warning.next,
+    function()
+        vim.diagnostic.goto_next({
+            severity = vim.diagnostic.severity.WARN
+        })
+        vim.api.nvim_feedkeys('zz', 'n', false)
+    end,
+    { desc = "[]] Goto next [w]arning diagnostic" }
+)
+
+-- vim: ts=4 sts=4 sw=4 et

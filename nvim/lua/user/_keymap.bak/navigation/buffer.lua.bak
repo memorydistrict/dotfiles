@@ -1,0 +1,42 @@
+--+=+------------------------+=+--
+--+=+-- Navigation: Buffer --+=+--
+--+=+------------------------+=+--
+
+local uc_keymap = require('user.config.keymap')
+local nnoremap = require('user.keymaps.utils').nnoremap
+
+--  Swap between last two buffers
+nnoremap(
+    uc_keymap.buffer.switch_to_last,
+    '<C-^>',
+    { desc = "['] Switch to last buffer" }
+)
+
+--  Write file
+nnoremap(
+    uc_keymap.file.write,
+    '<cmd>w<cr>',
+    { silent = false, desc = "[W]rite file"}
+)
+
+--  Quit buffer
+nnoremap(
+    uc_keymap.file.quit,
+    '<cmd>q<cr>',
+    { silent = false, desc = "[Q]uit buffer" }
+)
+
+--  Write file, and quit buffer
+nnoremap(
+    uc_keymap.file.write_quit,
+    '<cmd>wq<cr>',
+    { silent = false, desc = "[z] Write file and quit buffer" }
+)
+
+nnoremap(
+    uc_keymap.file.force_quit,
+    '<cmd>q!<cr>',
+    { silent = false, desc = "[F]orce [q]uit" }
+)
+
+-- vim: ts=4 sts=4 sw=4 et

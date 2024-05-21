@@ -1,0 +1,212 @@
+--+=+----------------------------+=+--
+--+=+-- Keymaps: Configuration --+=+--
+--+=+----------------------------+=+--
+
+local M = {}
+
+M.leader = '<Space>' --
+
+M.enforce_motions = true  -- Not mapped
+
+M.file = {
+    write = '<Leader>w', --
+    quit = '<Leader>q', --
+    write_quit = '<Leader>z', --
+    force_quit = '<Leader>qf', --
+    open = {
+        file = '<Leader>sf', --
+        recent = '<Leader>?', --
+        buffer = '<Leader>sb', --
+    },
+}
+
+M.help = {
+    search = '<Leader>sh', --
+}
+
+M.command = {
+    search = '<Leader>sc',
+}
+
+M.edit = {
+    undo = 'u', --  -- Not mapped
+    redo = 'U', --  -- Not mapped
+    format = '<Leader>f', --
+    mode = {
+        i_to_n = 'jj', --
+        t_to_n = { '<Esc>', 'jj' }, --
+    }
+}
+
+M.format = {
+    spelling_suggestions = '<Leader>ss',
+}
+
+M.search = {
+    buffer = '<Leader>/',
+    find_replace = {
+        spectre = '<Leader>S', --
+        cursor = {
+            quick = 'S', --
+            global = '<Leader>sw', --
+        },
+    },
+    highlight = {
+        goto = {
+            prev = '#', --
+            next = '*', --
+        },
+        deactivate = '<Leader>no', --
+    },
+}
+
+M.navigation = {
+    cursor = {
+        up = '<C-k>', --
+        down = '<C-j>', --
+        left = '<C-h>', --
+        right = '<C-l>', --
+    },
+}
+
+M.git = {
+    blame = '<Leader>gb', --
+    search = '<Leader>gf', --
+}
+
+M.harpoon = {
+    open = '<Leader>ho', --
+    add = '<Leader>ha', --
+    remove = '<Leader>hr', --
+    clear = '<Leader>hc', --
+    goto = { '<Leader>1', '<Leader>2', '<Leader>3', '<Leader>4', '<Leader>5', }, --
+}
+
+M.oil = {
+    open = '<Leader>e', --
+}
+
+M.view = {
+    center = '%', --
+    flip_windows = '<Leader>fw', --
+    resize = {
+        maximize = '<Leader>m', --
+        even_split = '<Leader>=', --
+    },
+    symbol_outline = '<Leader>so', --
+    fold = {
+        all = {
+            open = 'zR', --
+            close = 'zM', --
+        },
+    },
+    cursor = {
+        open_link = 'gx',
+        goto = {
+            page = {
+                up = '<C-u>', --
+                down = '<C-d>', --
+            },
+            blankline = {
+                prev = '{', --
+                next = '}', --
+            },
+            block = {
+                prev = 'n', --
+                next = 'N', --
+            },
+            line = {
+                first = 'gg', --
+                last = 'G', --
+            },
+            term = {
+                prev = '<C-i>', --
+                next = '<C-o>', --
+            },
+            char = {
+                first = { 'H', '<Home>' }, --
+                last = { 'L', '<End>' },  --
+            },
+        },
+    },
+}
+
+M.buffer = {
+    switch_to_last = "<Leader>'", --
+}
+
+M.diagnostic = {
+    open = '<Leader>d', --
+    goto = {
+        all = {
+            prev = '[d', --
+            next = ']d', --
+        },
+        error = {
+            prev = '[e', --
+            next = ']e', --
+        },
+        warning = {
+            prev = '[w', --
+            next = ']w', --
+        },
+    },
+    quickfix = {
+        open = '<Leader>co', --
+        close = '<Leader>cc', --
+        add_all = '<Leader>ld', --
+        goto = {
+            prev = '<Leader>cp', --
+            next = '<Leader>cn', --
+        },
+    },
+}
+
+M.autocompletion = {
+    suggestion = {
+        prev = {
+            [1] = '<C-k>', --
+            [2] = '<S-Tab>', --
+        },
+        next = {
+            [1] = '<C-j>', --
+            [2] = '<Tab>', --
+        },
+        confirm = '<CR>', --
+    },
+    scroll_preview = {
+        up = '<C-u>', --
+        down = '<C-d>', --
+    },
+    completion_window = {
+        open = '<C-Space>', --
+        close = '<C-c>', --
+    },
+}
+
+M.lsp = {
+    rename = '<Leader>rn', --
+    code_action = '<Leader>ca', --
+    goto = {
+        declaration = 'gD', --
+        definition = 'gd', --
+        references = 'gr', --
+        implementation = 'gi', --
+    },
+    documentation = {
+        hover = 'K', --
+        signature = {
+            [1] = '<Leader>k', --
+            [2] = '<C-k>', --
+        },
+    },
+    symbols = {
+        buffer = '<Leader>bs', --
+        project = '<Leader>ps', --
+    },
+    type_definition = 'td', --
+}
+
+return M
+
+-- vim: ts=4 sts=4 sw=4 et

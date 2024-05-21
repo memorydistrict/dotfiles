@@ -1,0 +1,23 @@
+--+=+--------------------+=+--
+--+=+-: Plugin.Harpoon :-+=+--
+--+=+--------------------+=+--
+
+return {
+    {
+        'ThePrimeagen/harpoon',
+        branch = 'harpoon2',
+        dependencies = {
+            'nvim-lua/plenary.nvim'
+        },
+        lazy = true,
+        config = function()
+            local harpoon = require('harpoon')
+
+            --  Required
+            harpoon:setup()
+            --  /Required
+        end,
+    },
+}
+
+--  vim: ts=4 sts=4 sw=4 et

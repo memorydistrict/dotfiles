@@ -1,0 +1,20 @@
+--+=+-- Comment highlighting in Neovim --+=+--
+
+return {
+    --+=+-- todo-comments.nvim --+=+--
+    --  Highlight comments in Neovim
+    --  https://github.com/folke/todo-comments.nvim
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = {
+        --+=+-- plenary.nvim --+=+--
+        --  Additional lua functions for Neovim
+        --  https://github.com/nvim-lua/plenary.nvim
+        'nvim-lua/plenary.nvim'
+    },
+    opts = {
+        signs = true
+    }
+}
+
+--  vim: ts=4 sts=4 sw=4 et

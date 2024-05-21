@@ -1,0 +1,42 @@
+--+=+------------------------------+=+--
+--+=+-- Navigation: Find/replace --+=+--
+--+=+------------------------------+=+--
+
+local uc_keymap = require('user.config.keymap')
+
+local nnoremap = require('user.keymaps.utils').nnoremap
+
+--  Quick find/replace term under the cursor
+nnoremap(
+    uc_keymap.search.find_replace.cursor.quick,
+    function()
+        local cmd = ':%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>'
+        local keys = vim.api.nvim_replace_termcodes(cmd, true, false, true)
+
+        vim.api.nvim_feedkeys(keys, 'n', false)
+    end,
+    { desc = "[S] Quick find/replace term under cursor" }
+)
+
+--  Open Spectre for global find/replace
+nnoremap(
+    uc_keymap.search.find_replace.spectre,
+    function()
+        require('spectre').toggle()
+    end,
+    { desc = "Open [S]pectre UI" }
+)
+
+--  Global find/replace term under the cursor, using Spectre
+--  FIX:    Currently being overridden by Telescope
+nnoremap(
+    uc_keymap.search.find_replace.cursor.global,
+    function()
+        require('spectre').open_visual({
+            select_word = true
+        })
+    end,
+    { desc = "[S]earch current [w]ord" }
+)
+
+-- vim: ts=4 sts=4 sw=4 et

@@ -1,0 +1,41 @@
+--+=+-----------------------------+=+--
+--+=+-: Plugin.Mini_IndentScope :-+=+--
+--+=+-----------------------------+=+--
+
+--  TODO:   Map colors to user.config.ui
+
+return {
+    {
+        'echasnovski/mini.indentscope',
+        version = false,
+        event = { 'BufEnter' },
+        opts = {
+            symbol = '│',
+            options = {
+                try_as_border = true
+            },
+        },
+        init = function()
+            --  local wave = require('kanagawa.colors').setup({ theme = 'wave' })
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = {
+                    'help',
+                    'lazy',
+                    'mason',
+                    'notify',
+                    'oil',
+                    'Oil',
+                },
+                callback = function()
+                    vim.b.miniindentscope_disable = true
+                end,
+            })
+
+            --vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', {
+            --    fg = wave.waveAqua1
+            --})
+        end
+    },
+}
+
+-- vim: ts=4 sts=4 sw=4 et

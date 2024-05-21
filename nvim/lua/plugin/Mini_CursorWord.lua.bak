@@ -1,0 +1,14 @@
+--+=+----------------------------+=+--
+--+=+-: Plugin.Mini_CursorWord :-+=+--
+--+=+----------------------------+=+--
+
+return {
+    {
+        'echasnovski/mini.cursorword',
+        event = { 'CursorMoved' },
+        version = '*',
+        lazy = true,
+    },
+}
+
+-- vim: ts=4 sts=4 sw=4 et

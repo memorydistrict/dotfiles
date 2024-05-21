@@ -1,0 +1,130 @@
+--+=+------------------------+=+--
+--+=+-- Navigation: Window --+=+--
+--+=+------------------------+=+--
+
+local uc_keymap = require('user.config.keymap')
+
+local nnoremap = require('user.keymaps.utils').nnoremap
+local tnoremap = require('user.keymaps.utils').tnoremap
+
+local TERM = os.getenv('TERM')
+
+--  Up
+--  NORMAL mode
+nnoremap(
+    uc_keymap.navigation.cursor.up,
+    function()
+        if vim.fn.exists(':KittyNavigationUp') ~= 0 and TERM == "xterm-kitty" then
+            vim.cmd.KittyNavigationUp()
+        elseif vim.fn.exists(':NvimTmuxNavigationUp') ~= 0 then
+            vim.cmd.NvimTmuxNavigationUp()
+        else
+            vim.cmd.wincmd('k')
+        end
+    end,
+    { desc = "[<C-k>] Window navigation: Up" }
+)
+
+--  Up
+--  TERMINAL mode
+tnoremap(
+    uc_keymap.navigation.cursor.up,
+    [[<Cmd>wincmd k<CR>]],
+    { desc = "[<C-k>] Window navigation: Up" }
+)
+
+--  Down
+--  NORMAL mode
+nnoremap(
+    uc_keymap.navigation.cursor.down,
+    function()
+        if vim.fn.exists(':KittyNavigationDown') ~= 0 and TERM == "xterm-kitty" then
+            vim.cmd.KittyNavigationDown()
+        elseif vim.fn.exists(':NvimTmuxNavigationDown') ~= 0 then
+            vim.cmd.NvimTmuxNavigationDown()
+        else
+            vim.cmd.wincmd('j')
+        end
+    end,
+    { desc = "[<C-j>] Window navigation: Down" }
+)
+
+--  Down
+--  TERMINAL mode
+tnoremap(
+    uc_keymap.navigation.cursor.down,
+    [[<Cmd>wincmd j<CR>]],
+    { desc = "[<C-j>] Window navigation: Down" }
+)
+
+--  Left
+--  NORMAL mode
+nnoremap(
+    uc_keymap.navigation.cursor.left,
+    function()
+        if vim.fn.exists(':KittyNavigationLeft') ~= 0 and TERM == "xterm-kitty" then
+            vim.cmd.KittyNavigationLeft()
+        elseif vim.fn.exists(':NvimTmuxNavigationLeft') ~= 0 then
+            vim.cmd.NvimTmuxNavigationLeft()
+        else
+            vim.cmd.wincmd('h')
+        end
+    end,
+    { desc = "[<C-h>] Window navigation: Left" }
+)
+
+--  Left
+--  TERMINAL mode
+tnoremap(
+    uc_keymap.navigation.cursor.left,
+    [[<Cmd>wincmd h<CR>]],
+    { desc = "[<C-h>] Window navigation: Left" }
+)
+
+--  Right
+--  NORMAL mode
+nnoremap(
+    uc_keymap.navigation.cursor.right,
+    function()
+        if vim.fn.exists(':KittyNavigationRight') ~= 0 and TERM == "xterm-kitty" then
+            vim.cmd.KittyNavigationRight()
+        elseif vim.fn.exists(':NvimTmuxNavigationRight') ~= 0 then
+            vim.cmd.NvimTmuxNavigationRight()
+        else
+            vim.cmd.wincmd('l')
+        end
+    end,
+    { desc = "[<C-l>] Window navigation: Right" }
+)
+
+--  Right
+--  TERMINAL mode
+tnoremap(
+    uc_keymap.navigation.cursor.right,
+    [[<Cmd>wincmd l<CR>]],
+    { desc = "[<C-l>] Window navigation: Right" }
+)
+
+--  Toggle Maximizer
+--  szw/vim-maximizer
+nnoremap(
+    uc_keymap.view.resize.maximize,
+    ':MaximizerToggle<cr>',
+    { desc = "Toggle [m]aximizer" }
+)
+
+--  Resize split windows to be equal size
+nnoremap(
+    uc_keymap.view.resize.even_split,
+    '<C-w>=',
+    { desc = "[=] Resize split windows to equal size" }
+)
+
+--  Flip windows
+nnoremap(
+    uc_keymap.view.flip_windows,
+    ':FlipWindows<cr>',
+    { desc = "[F]lip [W]indows" }
+)
+
+-- vim: ts=4 sts=4 sw=4 et

@@ -1,0 +1,491 @@
+--+=+----------------+=+--
+--+=+-- Navigation --+=+--
+--+=+----------------+=+--
+
+local nnoremap = require('user.keymaps.utils').nnoremap
+local vnoremap = require('user.keymaps.utils').vnoremap
+local inoremap = require('user.keymaps.utils').inoremap
+local tnoremap = require('user.keymaps.utils').tnoremap
+
+local M = {}
+
+local TERM = os.getenv('TERM')
+
+--+=+--------------------+=+--
+--+=+-- Initialization --+=+--
+--+=+--------------------+=+--
+
+--  Disable `<Space>` bar, to avoid `<Leader>` interference
+--  NORMAL mode
+nnoremap(
+    '<Space>',
+    '<nop>',
+    { desc = "Disable `<Space>`, to avoid `<Leader>` interference" }
+)
+
+--  Disable `<Space>` bar, to avoid `<Leader>` interference
+--  VISUAL mode
+vnoremap(
+    '<space>',
+    '<nop>',
+    { desc = "Disable `<Space>`, to avoid `<Leader>` interference" }
+)
+
+--  Re-enable default `<Space>` functionality to prevent input delay
+tnoremap(
+    '<space>',
+    '<space>',
+    { desc = "Re-enable `<Space>` in TERMINAL mode, to prevent input delay" }
+)
+
+--+=+------------+=+--
+--+=+-- Window --+=+--
+--+=+------------+=+--
+
+--  Up
+--  NORMAL mode
+nnoremap(
+    '<C-k>',
+    function()
+        if vim.fn.exists(':KittyNavigationUp') ~= 0 and TERM == "xterm-kitty" then
+            vim.cmd.KittyNavigationUp()
+        elseif vim.fn.exists(':NvimTmuxNavigationUp') ~= 0 then
+            vim.cmd.NvimTmuxNavigationUp()
+        else
+            vim.cmd.wincmd('k')
+        end
+    end,
+    { desc = "[<C-k>] Window navigation: Up" }
+)
+
+--  Up
+--  TERMINAL mode
+tnoremap(
+    '<C-k>',
+    [[<Cmd>wincmd k<CR>]],
+    { desc = "[<C-k>] Window navigation: Up" }
+)
+
+--  Down
+--  NORMAL mode
+nnoremap(
+    '<C-j>',
+    function()
+        if vim.fn.exists(':KittyNavigationDown') ~= 0 and TERM == "xterm-kitty" then
+            vim.cmd.KittyNavigationDown()
+        elseif vim.fn.exists(':NvimTmuxNavigationDown') ~= 0 then
+            vim.cmd.NvimTmuxNavigationDown()
+        else
+            vim.cmd.wincmd('j')
+        end
+    end,
+    { desc = "[<C-j>] Window navigation: Down" }
+)
+
+--  Down
+--  TERMINAL mode
+tnoremap(
+    '<C-j>',
+    [[<Cmd>wincmd j<CR>]],
+    { desc = "[<C-j>] Window navigation: Down" }
+)
+
+--  Left
+--  NORMAL mode
+nnoremap(
+    '<C-h>',
+    function()
+        if vim.fn.exists(':KittyNavigationLeft') ~= 0 and TERM == "xterm-kitty" then
+            vim.cmd.KittyNavigationLeft()
+        elseif vim.fn.exists(':NvimTmuxNavigationLeft') ~= 0 then
+            vim.cmd.NvimTmuxNavigationLeft()
+        else
+            vim.cmd.wincmd('h')
+        end
+    end,
+    { desc = "[<C-h>] Window navigation: Left" }
+)
+
+--  Left
+--  TERMINAL mode
+tnoremap(
+    '<C-h>',
+    [[<Cmd>wincmd h<CR>]],
+    { desc = "[<C-h>] Window navigation: Left" }
+)
+
+--  Right
+--  NORMAL mode
+nnoremap(
+    '<C-l>',
+    function()
+        if vim.fn.exists(':KittyNavigationRight') ~= 0 and TERM == "xterm-kitty" then
+            vim.cmd.KittyNavigationRight()
+        elseif vim.fn.exists(':NvimTmuxNavigationRight') ~= 0 then
+            vim.cmd.NvimTmuxNavigationRight()
+        else
+            vim.cmd.wincmd('l')
+        end
+    end,
+    { desc = "[<C-l>] Window navigation: Right" }
+)
+
+--  Right
+--  TERMINAL mode
+tnoremap(
+    '<C-l>',
+    [[<Cmd>wincmd l<CR>]],
+    { desc = "[<C-l>] Window navigation: Right" }
+)
+
+--+=+------------+=+--
+--+=+-- Buffer --+=+--
+--+=+------------+=+--
+
+--  Swap between last two buffers
+nnoremap(
+    "<leader>'",
+    '<C-^>',
+    { desc = "['] Switch to last buffer" }
+)
+
+--  Write file
+nnoremap(
+    '<leader>w',
+    '<cmd>w<cr>',
+    { silent = false, desc = "[W]rite file"}
+)
+
+--  Quit buffer
+nnoremap(
+    '<leader>q',
+    '<cmd>q<cr>',
+    { silent = false, desc = "[Q]uit buffer" }
+)
+
+--  Write file, and quit buffer
+nnoremap(
+    '<leader>z',
+    '<cmd>wq<cr>',
+    { silent = false, desc = "[z] Write file and quit buffer" }
+)
+
+--  Open Oil UI
+nnoremap(
+    '<leader>e',
+    function()
+        require('oil').toggle_float()
+    end,
+    { desc = "[e] Open Oil UI" }
+)
+
+--+=+------------+=+--
+--+=+-- Cursor --+=+--
+--+=+------------+=+--
+
+--  Center buffer to cursor
+nnoremap(
+    '%',
+    '%zz',
+    { desc = "[%] Center buffer to cursor" }
+)
+
+--  Page up, and center buffer to cursor
+nnoremap(
+    '<C-u>',
+    '<C-u>zz',
+    { desc = "[<C-u>] Page up" }
+)
+
+--  Page down, and center buffer to cursor
+nnoremap(
+    '<C-d>',
+    '<C-d>zz',
+    { desc = "[<C-d>] Page down" }
+)
+
+--  Blankline previous, and center buffer to cursor
+nnoremap(
+    '{',
+    '{zz',
+    { desc = "[{] Previous blankline" }
+)
+
+--  Blankline next, and center buffer to cursor
+nnoremap(
+    '}',
+    '}zz',
+    { desc = "[}] Next blankline" }
+)
+
+--  End block previous, and center buffer to cursor
+nnoremap(
+    'n',
+    'nzz',
+    { desc = "[n] Previous endblock" }
+)
+
+--  End block next, center buffer to cursor
+nnoremap(
+    'N',
+    'Nzz',
+    { desc = "[N] Next endblock" }
+)
+
+--  Goto first line in buffer, and center buffer to cursor
+nnoremap(
+    'gg',
+    'ggzz',
+    { desc = "[gg] Goto first line in buffer" }
+)
+
+--  Goto last line in buffer, and center buffer to cursor
+nnoremap(
+    'G',
+    'Gzz',
+    { desc = "[G]oto last line in buffer" }
+)
+
+--  Goto previous term under cursor, and center buffer to cursor
+nnoremap(
+    '<C-i>',
+    '<C-o>zz',
+    { desc = "[<C-i>] Goto previous term under cursor" }
+)
+
+--  Goto next term under cursor, and center buffer to cursor
+nnoremap(
+    '<C-o>',
+    '<C-i>zz',
+    { desc = "[<C-o>] Goto next term under cursor" }
+)
+
+--  Goto first character in the line
+nnoremap(
+    'H',
+    '^',
+    { desc = "[H] Goto first character in the line" }
+)
+
+--  Goto first character in the line
+--  Alternative
+nnoremap(
+    '<Home>',
+    '^',
+    { desc = "[<Home>] Goto first character in the line" }
+)
+
+--  Goto first character in the line
+--  INSERT mode
+inoremap(
+    '<Home>',
+    '<Esc>^i',
+    { desc = "[<Home>] Goto first character in the line" }
+)
+
+--  Goto last character in the line
+nnoremap(
+    'L',
+    '$<left>',
+    { desc = "[L] Goto last character in the line" }
+)
+
+--  Goto last character in the line
+--  Alternative
+nnoremap(
+    '<End>',
+    '$<left>',
+    { desc = "[<End>] Goto last character in the line" }
+)
+
+--  Goto last character in the line
+--  INSERT mode
+inoremap(
+    '<End>',
+    '<Esc>$<left>i',
+    { desc = "[<End>] Goto last character in the line" }
+)
+
+--+=+------------------+=+--
+--+=+-- Highlighting --+=+--
+--+=+------------------+=+--
+
+--  Highlight all, goto previous term under the cursor, and center buffer to cursor
+nnoremap(
+    '#',
+    '#zz',
+    { desc = "[#] Highlight all and goto previous term under cursor" }
+)
+
+--  Highlight all, goto next term under cursor, and center buffer to cursor
+nnoremap(
+    '*',
+    '*zz',
+    { desc = "[*] Highlight all and goto next term under cursor" }
+)
+
+--  Turn off highlighted results
+nnoremap(
+    '<leader>no',
+    '<cmd>noh<cr>',
+    { desc = "[no] Turn off highlighted results" }
+)
+
+--+=+------------------+=+--
+--+=+-- Find/replace --+=+--
+--+=+------------------+=+--
+
+--  Quick find/replace term under the cursor
+nnoremap(
+    'S',
+    function()
+        local cmd = ':%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>'
+        local keys = vim.api.nvim_replace_termcodes(cmd, true, false, true)
+
+        vim.api.nvim_feedkeys(keys, 'n', false)
+    end,
+    { desc = "[S] Quick find/replace term under cursor" }
+)
+
+--  Open Spectre for global find/replace
+nnoremap(
+    '<leader>S',
+    function()
+        require('spectre').toggle()
+    end,
+    { desc = "Open [S]pectre UI" }
+)
+
+--  Global find/replace term under the cursor, using Spectre
+--  FIX:    Currently being overridden by Telescope
+nnoremap(
+    '<leader>sw',
+    function()
+        require('spectre').open_visual({
+            select_word = true
+        })
+    end,
+    { desc = "[S]earch current [w]ord" }
+)
+
+--  Toggle Maximizer
+--  szw/vim-maximizer
+nnoremap(
+    '<leader>m',
+    ':MaximizerToggle<cr>',
+    { desc = "Toggle [m]aximizer" }
+)
+
+--  Resize split windows to be equal size
+nnoremap(
+    '<leader>=',
+    '<C-w>=',
+    { desc = "[=] Resize split windows to equal size" }
+)
+
+--  Format
+nnoremap(
+    '<leader>f',
+    function()
+        conform.format({
+            async = true,
+            lsp_fallback = true,
+        })
+    end,
+    { desc = "[F]ormat the current buffer" }
+)
+
+--  Flip windows
+nnoremap(
+    '<leader>fw',
+    ':FlipWindows<cr>',
+    { desc = "[F]lip [W]indows" }
+)
+
+--  Open the link under the cursor
+--  TODO:   Open plugin strings as GitHub links
+nnoremap(
+    'gx',
+    ':sil !open <cWORD><cr>',
+    { silent = true }
+)
+
+--+=+-----------+=+--
+--+=+-- Modes --+=+--
+--+=+-----------+=+--
+
+--  Leave INSERT
+--  Enter NORMAL
+inoremap(
+    'jj',
+    '<esc>',
+    { desc = "[jj] Leave INSERT mode" }
+)
+
+--  Enter NORMAL mode while in terminal
+tnoremap(
+    '<esc>',
+    [[<C-\><C-n>]]
+)
+
+--  Enter NORMAL mode while in terminal
+--  Alternative
+tnoremap(
+    'jj',
+    [[<C-\><C-n>]]
+)
+
+--+=+---------------+=+---
+--+=+-- Clipboard --+=+=--
+--+=+---------------+=+---
+
+--  Redo
+--  NORMAL mode
+nnoremap(
+    'U',
+    '<C-r>',
+    { desc = "[U] Redo" }
+)
+
+--  Paste without losing the contents of the register
+vnoremap(
+    '<A-j>',
+    ":m '>+1<CR>gv=gv",
+    { desc = "" }
+)
+
+vnoremap(
+    '<A-k>',
+    ":m '<-2<CR>gv=gv",
+    { desc = "" }
+)
+
+xnoremap(
+    '<leader>p',
+    '"_dP',
+    { desc = "" }
+)
+
+--  Reselect the last visual selection
+xnoremap(
+    '<<',
+    function()
+        vim.cmd('normal! <<')
+        vim.cmd('normal! gv')
+    end
+)
+
+xnoremap(
+    '>>',
+    function()
+        vim.cmd('normal! <<')
+        vim.cmd('normal! gv')
+    end
+)
+
+--+=+--------------+=+--
+--+=+-- Terminal --+=+--
+--+=+--------------+=+--
+
+return M
+

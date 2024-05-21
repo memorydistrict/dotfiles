@@ -1,0 +1,43 @@
+--+=+---------------------------+=+--
+--+=+-- Diagnostics: Quickfix --+=+--
+--+=+---------------------------+=+--
+
+local uc_keymap = require('user.config.keymap')
+local nnoremap = require('user.keymaps.utils').nnoremap
+
+--  Open the Quickfix list
+nnoremap(
+    uc_keymap.diagnostic.quickfix.open,
+    ':copen<cr>zz',
+    { desc = "[c] [O]pen Quickfix list" }
+)
+
+--  Place all diagnostics into a Quickfix list
+nnoremap(
+    uc_keymap.diagnostic.quickfix.add_all,
+    vim.diagnostic.setqflist,
+    { desc = "Quickfix [L]ist [D]iagnostics" }
+)
+
+--  Goto previous Quickfix list item
+nnoremap(
+    uc_keymap.diagnostic.quickfix.goto.prev,
+    ':cprevious<cr>zz',
+    { desc = "[c] Goto [p]revious Quickfix list item" }
+)
+
+--  Goto to next Quickfix list item
+nnoremap(
+    uc_keymap.diagnostic.quickfix.goto.next,
+    ':cnext<cr>zz',
+    { desc = "[c] Goto [n]ext Quickfix list item" }
+)
+
+--  Close the Quickfix list
+nnoremap(
+    uc_keymap.diagnostic.quickfix.close,
+    ':cclose<cr>zz',
+    { desc = "[c] [C]lose Quickfix list" }
+)
+
+-- vim: ts=4 sts=4 sw=4 et

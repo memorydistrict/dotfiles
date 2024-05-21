@@ -69,7 +69,7 @@
     #  /etc/profiles/per-user/thomas/etc/profile.d/hm-session-vars.sh
     #
     home.sessionVariables = {
-        # EDITOR = "emacs";
+        EDITOR = "nvim";
     };
 
     # Let Home Manager install and manage itself.
@@ -80,6 +80,26 @@
         userEmail = "80621403+memorydistrict@users.noreply.github.com";
         extraConfig = {
             init.defaultBranch = "main";
+            safe.directory = "/etc/nixos";
+        };
+    };
+    programs.zsh = {
+        enable = true;
+
+        enableCompletion = true;
+        autosuggestion.enable = true;
+        syntaxHighlighting.enable = true;
+
+        history.size = 1000;
+        history.path = "${config.xdg.dataHome}/zsh/history";
+
+        oh-my-zsh = {
+            enable = true;
+            plugins = [ "git" ];
+        };
+
+        shellAliases = {
+            ll = "ls -l";
         };
     };
 }

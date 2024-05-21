@@ -1,0 +1,103 @@
+* {
+    font-family: "GoMono Nerd Font";
+    font-weight: bold;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+}
+
+#group-workspace {
+    background-color: rgba(155, 200, 0, 1);
+}
+
+#custom-icon {
+    margin-left: 2px;
+    padding: 0px 10px;
+    color: rgba(115, 155, 208, 1);
+}
+
+#custom-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#window {
+    padding: 0px 10px;
+}
+
+#workspaces button {
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#workspaces button:hover {
+    background-color: rgba(0, 0, 0, .1);
+    color: rgba(255, 255, 255, 1);
+}
+
+#workspaces button.active {
+    font-weight: bold;
+    color: rgba(160, 187, 223, 1);
+}
+
+#workspaces button.urgent {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+#cpu {
+    padding: 0px 5px;
+}
+
+#backlight {
+    padding: 0px 5px;
+}
+
+#backlight:hover {
+    background-color: rgba(0, 0, 0, .1)
+}
+
+#pulseaudio {
+    padding: 0px 5px;
+}
+
+#pulseaudio:hover {
+    background-color: rgba(0, 0, 0, .1)
+}
+
+#battery {
+    padding: 0px 5px;
+}
+
+#battery:hover {
+    background-color: rgba(0, 0, 0, .1)
+}
+
+#battery.charging {
+    color: rgba(153, 198, 144, 1);
+}
+
+#tray {
+    padding: 0px 5px;
+}
+
+#idle_inhibitor {
+    /*background: rgba(200, 10, 130, .7);*/
+    padding: 0px 5px;
+}
+
+#idle_inhibitor:hover {
+    background-color: rgba(0, 0, 0, .1);
+    color: rgba(153, 198, 144, 1);
+}
+
+#custom-power {
+    /*background: rgba(130, 10, 200, .7);*/
+    padding: 0px 7px;
+}
+
+#custom-power:hover {
+    background-color: rgba(0, 0, 0, .1);
+    color: rgba(153, 198, 144, 1);
+}
